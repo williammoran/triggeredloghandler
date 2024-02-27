@@ -46,8 +46,8 @@ func Handle(w http.ResponseWriter, r *http.Request) {
         uuid.New().String(),
         slog.LevelError,
     )
-	logger := slog.New(handler)
-	// Now use the `logger` as any other logger. Messages will
+    logger := slog.New(handler)
+    // Now use the `logger` as any other logger. Messages will
     // only be printed to the console if one of the messages in
     // the log stream meets or exceeds the Error severity level.
 }
