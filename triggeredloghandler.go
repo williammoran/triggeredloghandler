@@ -71,14 +71,14 @@ func (tlh *TriggeredLogHandler) Enabled(_ context.Context, _ slog.Level) bool {
 // yet, or sends any backlog including this record if it's been
 // triggered
 func (tlh *TriggeredLogHandler) Handle(ctx context.Context, record slog.Record) error {
+	tlh.base.mu.Lock()
+	defer tlh.base.mu.Unlock()
 	if record.Level >= tlh.base.triggerLevel {
 		tlh.base.triggered = true
 	}
-	tlh.base.mu.Lock()
-	defer tlh.base.mu.Unlock()
 	if tlh.base.triggered {
 		if len(tlh.base.backlog) > 0 {
-			err := tlh.forwardBacklog(ctx)
+			err := tlh.forwardBacklog()
 			if err != nil {
 				tlh.base.backlog = append(
 					tlh.base.backlog,
@@ -109,7 +109,7 @@ func (tlh *TriggeredLogHandler) Handle(ctx context.Context, record slog.Record) 
 // If an error is encountered when sending messages, unsent
 // messages are preserved and an error is returned to indicate
 // a retry on the next message submission
-func (tlh *TriggeredLogHandler) forwardBacklog(ctx context.Context) error {
+func (tlh *TriggeredLogHandler) forwardBacklog() error {
 	for idx, record := range tlh.base.backlog {
 		err := record.target.Handle(record.ctx, record.record)
 		if err != nil {
