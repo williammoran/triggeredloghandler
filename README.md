@@ -55,6 +55,8 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 
 See the examples directory for a more extensive example.
 
+TriggeredLogHandler is safe for concurrent use.
+
 ## Shortcomings
 
 In case it's not obvious, the library will increase memory usage
@@ -66,8 +68,15 @@ approximate 3x increase in garbage collector activity over a baseline
 execution. However, this increase is on a service that allocates almost
 no heap space on its own.
 
-Additionally, the measured performance impact is only X seconds per
-request.
+The performance impact is minimal enough to be difficult to measure reliably.
+
+Using the service example, a
+single thread was actually faster when using triggered logger than when
+logging directly to /dev/null. I suspect this is due, in part, to the
+fact that there are ample CPU cores to take care of garbage collection.
+
+Submitting 16 simultaneous requests to the service example resulted in
+a slowdown of 1 microsecond per request.
 
 As a result, it's my belief that TriggeredLogHandler is appropriate for
 production use. However, it's highly recommended that adopters test their
