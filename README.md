@@ -29,7 +29,7 @@ sufficiently powerful log aggregation system becomes a problem.
 TriggeredLogHandler is a go library designed to be used as an `slog.Handler`.
 As a result, it integrates nicely with the logging you're already doing.
 
-Log messages are orgnaized into "log streams", each with a unqiue ID to
+Log messages are organized into "log streams", each with a unqiue ID to
 allow them to be easily grouped and filtered.
 
 Additionally, each log stream is configured with a trigger threshold. Log
