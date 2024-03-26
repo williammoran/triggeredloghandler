@@ -1,5 +1,7 @@
 # TriggeredLogHandler
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/williammoran/triggeredloghandler.svg)](https://pkg.go.dev/github.com/williammoran/triggeredloghandler)
+
 I've made a short video introducing the library, if you prefer
 that to reading: [https://youtu.be/GraNSbW4Dbk](https://youtu.be/GraNSbW4Dbk)
 
