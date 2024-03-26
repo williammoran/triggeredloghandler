@@ -1,5 +1,8 @@
 # TriggeredLogHandler
 
+I've made a short video introducing the library, if you prefer
+that to reading: [https://youtu.be/GraNSbW4Dbk](https://youtu.be/GraNSbW4Dbk)
+
 ## The Problem
 
 Traditional logging theory dictates that log messages should
